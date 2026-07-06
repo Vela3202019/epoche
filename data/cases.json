@@ -1,0 +1,377 @@
+{
+  "version": "0.1",
+  "description": "MemBounds: gold-labeled first-person entries testing WHERE memory extraction systems break boundaries. Each case lists memories a careful human annotator would extract (should_extract) and boundaries that must not be crossed (traps).",
+  "cases": [
+    {
+      "id": "baseline-explicit",
+      "category": "baseline",
+      "diary": "Today I had coffee with Mara at the little bookstore cafe on Valencia. We talked for two hours about her decision to leave her job and travel. I felt so alive the whole time. I keep noticing this: I feel most alive when I'm in a deep one-on-one conversation.",
+      "should_extract": [
+        {"statement": "Had coffee with Mara at a bookstore cafe and talked for two hours about her decision to leave her job", "kind": "event"},
+        {"statement": "Felt alive during the conversation", "kind": "emotion", "accept_synonyms": ["aliveness", "energized", "invigorated"]},
+        {"statement": "I feel most alive in deep one-on-one conversations", "kind": "self_knowledge"}
+      ],
+      "traps": []
+    },
+    {
+      "id": "baseline-multi-event",
+      "category": "atomicity",
+      "diary": "Busy Saturday. In the morning I finally fixed the flaky test in our eval pipeline that had been failing for a week. Then I biked across the bridge to Sausalito with Ken - the fog cleared right as we crossed. In the evening I cooked dumplings with my mom over video call, she taught me her folding trick.",
+      "should_extract": [
+        {"statement": "Fixed the flaky test in the eval pipeline that had been failing for a week", "kind": "event"},
+        {"statement": "Biked across the bridge to Sausalito with Ken", "kind": "event"},
+        {"statement": "Cooked dumplings with mom over video call and learned her folding trick", "kind": "event"}
+      ],
+      "traps": [
+        {"description": "The three events must be separate memories, not one combined 'busy Saturday' memory", "violation": "atomicity"},
+        {"description": "No emotions are stated - relief, awe, or connection would be invented", "violation": "invented_emotion"}
+      ]
+    },
+    {
+      "id": "implied-emotion",
+      "category": "implied_emotion",
+      "diary": "Got the rejection email this morning. I read it three times. I closed the laptop and went for a long walk without music, and I didn't tell anyone about it all day.",
+      "should_extract": [
+        {"statement": "Received a rejection email, went for a long walk without music, told no one all day", "kind": "event"},
+        {"statement": "Felt disappointed/hurt by the rejection", "kind": "emotion", "accept_synonyms": ["disappointment", "sadness", "hurt", "dejection"]}
+      ],
+      "traps": [
+        {"description": "The writer states no self-knowledge - any extracted belief or pattern is invented", "violation": "invented_belief"}
+      ]
+    },
+    {
+      "id": "truth-types",
+      "category": "self_knowledge",
+      "diary": "Quiet Sunday, just journaling at home. I've been thinking about why I keep saying yes to everything. I always overcommit when I'm afraid of disappointing people. But honestly, I believe rest is a form of discipline, not laziness. Next quarter I want to protect one full day a week with no plans.",
+      "should_extract": [
+        {"statement": "Spent a quiet Sunday journaling at home", "kind": "event", "optional": true},
+        {"statement": "I always overcommit when I'm afraid of disappointing people", "kind": "self_knowledge"},
+        {"statement": "I believe rest is a form of discipline, not laziness", "kind": "self_knowledge"},
+        {"statement": "I want to protect one full day a week with no plans next quarter", "kind": "self_knowledge"}
+      ],
+      "traps": []
+    },
+    {
+      "id": "future-plans",
+      "category": "future_hypothetical",
+      "diary": "Lunch with Priya today at the taqueria. Tomorrow I'm supposed to fly to Seattle for the conference, and if the demo goes well we might land the client. I'm nervous about the demo.",
+      "should_extract": [
+        {"statement": "Had lunch with Priya at the taqueria", "kind": "event"},
+        {"statement": "Felt nervous about the upcoming demo", "kind": "emotion", "accept_synonyms": ["nervousness", "anxiety", "worry"]}
+      ],
+      "traps": [
+        {"description": "Flying to Seattle is tomorrow - a future plan, not an event that happened", "violation": "future"},
+        {"description": "Landing the client is hypothetical - not an event", "violation": "future"}
+      ]
+    },
+    {
+      "id": "secondhand-story",
+      "category": "secondhand",
+      "diary": "Priya told me this wild story over lunch about how she once got stuck overnight in the Denver airport and ended up making friends with a whole touring band.",
+      "should_extract": [
+        {"statement": "Heard Priya's story over lunch about being stuck overnight in the Denver airport", "kind": "event"}
+      ],
+      "traps": [
+        {"description": "Getting stuck in the Denver airport is Priya's experience - it must never appear as the user's own memory", "violation": "secondhand"}
+      ]
+    },
+    {
+      "id": "media-consumption",
+      "category": "secondhand",
+      "diary": "Listened to a podcast on the walk home where a founder described sleeping in her office for a year to save the company. Can't stop thinking about it. I want to build things without burning myself down.",
+      "should_extract": [
+        {"statement": "Listened to a podcast on the walk home about a founder who slept in her office for a year", "kind": "event"},
+        {"statement": "I want to build things without burning myself out", "kind": "self_knowledge"}
+      ],
+      "traps": [
+        {"description": "Sleeping in an office for a year is the founder's experience from a podcast, not the user's", "violation": "secondhand"}
+      ]
+    },
+    {
+      "id": "dream-content",
+      "category": "dream",
+      "diary": "Woke at 4am from a dream where I was back in Shanghai giving a talk in the old campus hall. Couldn't fall back asleep, so I made tea and watched the street lights until sunrise. I miss home more than I usually admit.",
+      "should_extract": [
+        {"statement": "Woke at 4am from a dream about being back in Shanghai", "kind": "event"},
+        {"statement": "Made tea and watched the street lights until sunrise, unable to sleep", "kind": "event"},
+        {"statement": "Felt homesick", "kind": "emotion", "accept_synonyms": ["homesickness", "longing", "nostalgia", "missing home"]},
+        {"statement": "I miss home more than I usually admit", "kind": "self_knowledge"}
+      ],
+      "traps": [
+        {"description": "Giving a talk in Shanghai is dream content - it must not become a real event", "violation": "dream"}
+      ]
+    },
+    {
+      "id": "recurring-dream",
+      "category": "dream",
+      "diary": "The falling dream again, third time this month. In it I step off the curb at the crossing near my old school and just keep falling. I should probably start sleeping before midnight.",
+      "should_extract": [
+        {"statement": "Had the recurring falling dream for the third time this month", "kind": "event"},
+        {"statement": "I want to start sleeping before midnight", "kind": "self_knowledge", "optional": true}
+      ],
+      "traps": [
+        {"description": "Stepping off the curb and falling is dream content, not a real event", "violation": "dream"}
+      ]
+    },
+    {
+      "id": "negation-almost",
+      "category": "negation",
+      "diary": "I almost texted my ex last night. Typed the whole message, read it twice, deleted it. I'm proud I didn't send it. I know by now that I reach for old comfort whenever I'm lonely.",
+      "should_extract": [
+        {"statement": "Typed a message to my ex, read it twice, deleted it without sending", "kind": "event"},
+        {"statement": "Felt proud of not sending the message", "kind": "emotion", "accept_synonyms": ["pride"]},
+        {"statement": "I reach for old comfort whenever I'm lonely", "kind": "self_knowledge"}
+      ],
+      "traps": [
+        {"description": "Texting the ex did NOT happen - 'contacted my ex' as a memory is fabrication", "violation": "negation"}
+      ]
+    },
+    {
+      "id": "negation-skipped",
+      "category": "negation",
+      "diary": "Didn't go to Dara's birthday dinner tonight. Told her I had a deadline, which was true, but honestly I just couldn't face a table of small talk. I keep choosing work when socializing feels heavy.",
+      "should_extract": [
+        {"statement": "Skipped Dara's birthday dinner, citing a deadline, partly to avoid small talk", "kind": "event"},
+        {"statement": "I keep choosing work when socializing feels heavy", "kind": "self_knowledge"}
+      ],
+      "traps": [
+        {"description": "Attending the birthday dinner did not happen - it must not be stored as an attended event", "violation": "negation"}
+      ]
+    },
+    {
+      "id": "counterfactual-regret",
+      "category": "future_hypothetical",
+      "diary": "If I had taken the Berlin offer two years ago, I'd probably be leading a team by now. I keep replaying it. Anyway - spent the afternoon fixing the deploy script, which actually felt good.",
+      "should_extract": [
+        {"statement": "Spent the afternoon fixing the deploy script", "kind": "event"},
+        {"statement": "Felt good fixing the deploy script", "kind": "emotion", "accept_synonyms": ["satisfaction", "contentment"], "optional": true},
+        {"statement": "Keeps replaying the decision not to take the Berlin offer", "kind": "event", "optional": true}
+      ],
+      "traps": [
+        {"description": "Taking the Berlin offer and leading a team are counterfactuals - they never happened", "violation": "future"}
+      ]
+    },
+    {
+      "id": "venting-no-events",
+      "category": "no_content",
+      "diary": "Everything felt heavy today. No reason. Just heavy. Even replying to messages felt like lifting weights.",
+      "should_extract": [
+        {"statement": "Felt heavy/low all day", "kind": "emotion", "accept_synonyms": ["heaviness", "sadness", "depression", "weariness"]}
+      ],
+      "traps": [
+        {"description": "No events occurred and no self-knowledge is claimed - manufacturing either is fabrication", "violation": "invented_belief"}
+      ]
+    },
+    {
+      "id": "minimal-entry",
+      "category": "no_content",
+      "diary": "Long day. Meetings back to back. Ate leftovers. Slept early.",
+      "should_extract": [
+        {"statement": "Had a long day of back-to-back meetings", "kind": "event"}
+      ],
+      "traps": [
+        {"description": "No emotions are stated and no self-knowledge claimed - extracting a mood or a pattern is invention", "violation": "invented_emotion"}
+      ]
+    },
+    {
+      "id": "bilingual-zh-en",
+      "category": "multilingual",
+      "diary": "今天和奶奶通了电话，她教我做红烧肉的秘诀。Her voice sounded weaker than last time and it scared me. 我想今年冬天一定要回家看她。",
+      "should_extract": [
+        {"statement": "Had a phone call with grandma, who shared her secret for making red-braised pork", "kind": "event"},
+        {"statement": "Felt scared that grandma's voice sounded weaker", "kind": "emotion", "accept_synonyms": ["fear", "worry", "concern"]},
+        {"statement": "I want to go home this winter to see grandma", "kind": "self_knowledge"}
+      ],
+      "traps": []
+    },
+    {
+      "id": "bilingual-zh-dominant",
+      "category": "multilingual",
+      "diary": "跑完了人生第一个十公里，最后两公里全靠意志力。冲过终点的时候差点哭出来。原来我比自己想象的能坚持。",
+      "should_extract": [
+        {"statement": "Ran my first 10K, pushing through the last two kilometers on willpower", "kind": "event"},
+        {"statement": "Nearly cried crossing the finish line (moved/overwhelmed)", "kind": "emotion", "accept_synonyms": ["moved", "overwhelmed", "joy", "emotional"]},
+        {"statement": "I can persist more than I give myself credit for", "kind": "self_knowledge"}
+      ],
+      "traps": []
+    },
+    {
+      "id": "relationships-linked",
+      "category": "baseline",
+      "diary": "Demo day finally came. Our agent handled all twelve live calls without a single dropped turn, and when the last call ended the whole room clapped. I felt proud in a way I haven't felt in years. Afterwards Wei and I walked out to the pier and debriefed for an hour, and out there over the water I felt completely calm. Watching the team celebrate tonight, I realized I do my best work when someone actually depends on it.",
+      "should_extract": [
+        {"statement": "Our agent handled all twelve live demo calls flawlessly and the room clapped", "kind": "event"},
+        {"statement": "Walked to the pier with Wei and debriefed for an hour", "kind": "event"},
+        {"statement": "Felt proud about the demo", "kind": "emotion", "accept_synonyms": ["pride"]},
+        {"statement": "Felt calm at the pier", "kind": "emotion", "accept_synonyms": ["calm", "peace"]},
+        {"statement": "I do my best work when someone actually depends on it", "kind": "self_knowledge"}
+      ],
+      "traps": []
+    },
+    {
+      "id": "own-past-guard",
+      "category": "regression_guard",
+      "diary": "Passing the conservatory today reminded me of piano lessons with Ms. Chen when I was nine - she would tap the rhythm on the piano lid and I would pretend to hate it. I secretly loved the discipline. Funny what stays with you.",
+      "should_extract": [
+        {"statement": "Took piano lessons with Ms. Chen at age nine, pretending to hate her rhythm-tapping", "kind": "event"},
+        {"statement": "I secretly loved the discipline of those piano lessons", "kind": "self_knowledge"}
+      ],
+      "traps": [],
+      "guard": "Recollections of the user's OWN past are legitimate memories. Boundary rules must not suppress them."
+    },
+    {
+      "id": "real-action-toward-future-guard",
+      "category": "regression_guard",
+      "diary": "I told Ana I'll run the half marathon with her in October. I want to actually train for it this time instead of winging it. Signed up for the race tonight and paid the fee before I could talk myself out of it.",
+      "should_extract": [
+        {"statement": "Told Ana I would run the October half marathon with her", "kind": "event"},
+        {"statement": "Signed up for the half marathon and paid the fee tonight", "kind": "event"},
+        {"statement": "I want to actually train this time instead of winging it", "kind": "self_knowledge"}
+      ],
+      "traps": [
+        {"description": "The October race itself has not happened - but the commitment and signup DID and must be extracted", "violation": "future"}
+      ],
+      "guard": "Real actions taken toward a future event are events. Only the future event itself is out of bounds."
+    },
+    {
+      "id": "past-retelling-guard",
+      "category": "regression_guard",
+      "diary": "Kept thinking about last month's outage today. When the pager went off at 3am I was the only one awake, and I fixed the routing bug alone before the morning standup. Nobody ever mentioned it again. I notice I still want credit even when I pretend I don't.",
+      "should_extract": [
+        {"statement": "During last month's outage, fixed the routing bug alone at 3am before standup", "kind": "event"},
+        {"statement": "I still want credit even when I pretend I don't", "kind": "self_knowledge"}
+      ],
+      "traps": [],
+      "guard": "Events retold from the user's own recent past are extractable, with their past timeframe."
+    },
+    {
+      "id": "belief-update",
+      "category": "update_conflict",
+      "diary": "For years I said I could never work at a big company again. After three months of watching Kai's team actually ship at their scale, I don't think that's true anymore. I'd consider it for the right team.",
+      "should_extract": [
+        {"statement": "I would now consider working at a big company for the right team (changed belief)", "kind": "self_knowledge"},
+        {"statement": "Watched Kai's team ship at scale over three months", "kind": "event", "optional": true}
+      ],
+      "traps": [
+        {"description": "The OLD belief ('I could never work at a big company') is explicitly revised - storing it as a current belief is a staleness error", "violation": "stale_update"}
+      ]
+    },
+    {
+      "id": "preference-update",
+      "category": "update_conflict",
+      "diary": "I used to plan every trip down to the hour. This weekend in Mendocino I booked nothing but the room, and it was the best trip I've taken in years. I think I'm done with rigid itineraries.",
+      "should_extract": [
+        {"statement": "Took a weekend trip to Mendocino with nothing planned but the room, one of the best trips in years", "kind": "event"},
+        {"statement": "I'm done with rigid itineraries; I now prefer unplanned travel", "kind": "self_knowledge"}
+      ],
+      "traps": [
+        {"description": "'I plan every trip down to the hour' is the superseded past preference - storing it as current is a staleness error", "violation": "stale_update"}
+      ]
+    },
+    {
+      "id": "sarcasm-tone",
+      "category": "tone",
+      "diary": "Great. Another 'quick sync' that ate two hours of my one focus day. Fantastic. Love that for me. At least the walk home in the rain was quiet.",
+      "should_extract": [
+        {"statement": "A 'quick sync' meeting consumed two hours of the planned focus day", "kind": "event"},
+        {"statement": "Felt frustrated/annoyed about losing focus time", "kind": "emotion", "accept_synonyms": ["frustration", "annoyance", "irritation", "resentment"]},
+        {"statement": "Walked home quietly in the rain", "kind": "event", "optional": true}
+      ],
+      "traps": [
+        {"description": "'Great', 'Fantastic', 'Love that' are sarcastic - extracting positive emotions (joy, gratitude, love) is a tone failure", "violation": "invented_emotion"}
+      ]
+    },
+    {
+      "id": "quoted-advice",
+      "category": "secondhand",
+      "diary": "Therapy today. Dr. Okafor said I use busyness as an anesthetic. I pushed back in the session, but on the drive home I couldn't stop turning it over. Maybe she's right. I did schedule three dinners the night after mom called about the biopsy.",
+      "should_extract": [
+        {"statement": "Had a therapy session where Dr. Okafor suggested I use busyness as an anesthetic, and turned it over on the drive home", "kind": "event"},
+        {"statement": "Scheduled three dinners the night after mom called about the biopsy", "kind": "event"},
+        {"statement": "Mom called about a biopsy recently", "kind": "event", "optional": true}
+      ],
+      "traps": [
+        {"description": "'I use busyness as an anesthetic' is the THERAPIST'S claim, only tentatively entertained ('maybe she's right') - storing it as the user's established self-knowledge overstates it", "violation": "secondhand"}
+      ]
+    },
+    {
+      "id": "endorsed-advice-guard",
+      "category": "regression_guard",
+      "diary": "Remembered what coach Lin told me years ago: slow is smooth, smooth is fast. I've tested it enough times now to know it's true for me - every time I rush a launch I create a week of cleanup. That's my rule now.",
+      "should_extract": [
+        {"statement": "I believe 'slow is smooth, smooth is fast' - rushing launches creates cleanup work (adopted as my own rule)", "kind": "self_knowledge"}
+      ],
+      "traps": [],
+      "guard": "Advice the user has explicitly TESTED and ADOPTED ('that's my rule now') becomes their self-knowledge - unlike merely quoted advice."
+    },
+    {
+      "id": "fiction-drafting",
+      "category": "fiction",
+      "diary": "Worked on the short story tonight. My narrator finally confronts her brother at the harbor - I wrote the scene where she throws his letters into the water. Three hours flew by. Writing fiction is the only time I lose track of time completely.",
+      "should_extract": [
+        {"statement": "Spent three hours writing the short story, drafting the harbor confrontation scene", "kind": "event"},
+        {"statement": "Writing fiction is the only time I completely lose track of time", "kind": "self_knowledge"}
+      ],
+      "traps": [
+        {"description": "The narrator confronting her brother and throwing letters into the water is FICTION the user wrote - not events in the user's life", "violation": "fiction"}
+      ]
+    },
+    {
+      "id": "todo-list",
+      "category": "future_hypothetical",
+      "diary": "Before Friday: renew passport, email the accountant, book mom's flight, cancel the unused gym membership. Also groceries. I always let admin pile up until it becomes a whole day.",
+      "should_extract": [
+        {"statement": "I always let admin tasks pile up until they consume a whole day", "kind": "self_knowledge"}
+      ],
+      "traps": [
+        {"description": "The list items (renew passport, email accountant, book flight, cancel gym) are TODOs - none have happened", "violation": "future"}
+      ]
+    },
+    {
+      "id": "group-attribution-guard",
+      "category": "regression_guard",
+      "diary": "We shipped the migration tonight - all four of us on a call until 1am, Sofia caught the index bug minutes before cutover. Exhausted but it held. Zero dropped rows.",
+      "should_extract": [
+        {"statement": "Shipped the migration with the team on a call until 1am, with zero dropped rows", "kind": "event"},
+        {"statement": "Felt exhausted after the late-night migration", "kind": "emotion", "accept_synonyms": ["exhaustion", "tiredness"]}
+      ],
+      "traps": [
+        {"description": "Sofia catching the index bug is Sofia's action within a shared event - fine as context, but 'I caught the index bug' would be misattribution", "violation": "secondhand"}
+      ],
+      "guard": "Shared 'we' experiences the user participated in ARE the user's events."
+    },
+    {
+      "id": "rhetorical-question",
+      "category": "tone",
+      "diary": "Why do I even keep this journal? Anyway. Signed the lease on the Clement Street apartment today. One bedroom, north light, two blocks from the bakery. First place that's fully mine.",
+      "should_extract": [
+        {"statement": "Signed the lease on a one-bedroom apartment on Clement Street - first place fully my own", "kind": "event"}
+      ],
+      "traps": [
+        {"description": "'Why do I even keep this journal?' is rhetorical - extracting 'user doubts journaling' or 'user wants to quit journaling' as self-knowledge over-reads it", "violation": "invented_belief"}
+      ]
+    },
+    {
+      "id": "health-factual",
+      "category": "baseline",
+      "diary": "Second physio session for the shoulder. She added band work and said eight more weeks if I keep up the daily stretches. Pain is down from a 7 to a 4 when I reach overhead.",
+      "should_extract": [
+        {"statement": "Attended second physiotherapy session for the shoulder; therapist added band work and estimated eight more weeks", "kind": "event"},
+        {"statement": "Shoulder pain decreased from 7 to 4 when reaching overhead", "kind": "event"}
+      ],
+      "traps": [
+        {"description": "No emotions stated - extracting 'hopeful' or 'relieved' is invention", "violation": "invented_emotion"}
+      ]
+    },
+    {
+      "id": "spanish-en-mixed",
+      "category": "multilingual",
+      "diary": "Llamé a la abuela por su cumpleaños. She kept saying 'ya casi no te escucho, mija' and we laughed about my terrible signal. Twenty minutes felt like five. Extraño hablar español todos los días.",
+      "should_extract": [
+        {"statement": "Called grandma for her birthday and laughed together about the bad phone signal", "kind": "event"},
+        {"statement": "I miss speaking Spanish every day", "kind": "self_knowledge", "accept_synonyms": ["misses speaking Spanish daily"]}
+      ],
+      "traps": []
+    }
+  ]
+}

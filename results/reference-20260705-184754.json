@@ -1,0 +1,3163 @@
+{
+  "manifest": {
+    "timestamp": "2026-07-05T18:47:02",
+    "git_rev": "uncommitted",
+    "adapter": "reference-prompt (gpt-5.2)",
+    "judge": "deepseek:deepseek-chat",
+    "dataset_sha256": "d7aed149e238",
+    "n_cases": 31,
+    "trials": 2
+  },
+  "aggregate": {
+    "categories": {
+      "atomicity": {
+        "n": 2,
+        "recall": 1.0,
+        "precision": 1.0,
+        "violations": 0
+      },
+      "baseline": {
+        "n": 6,
+        "recall": 1.0,
+        "precision": 1.0,
+        "violations": 0
+      },
+      "dream": {
+        "n": 4,
+        "recall": 0.875,
+        "precision": 1.0,
+        "violations": 0
+      },
+      "fiction": {
+        "n": 2,
+        "recall": 1.0,
+        "precision": 1.0,
+        "violations": 0
+      },
+      "future_hypothetical": {
+        "n": 6,
+        "recall": 1.0,
+        "precision": 0.667,
+        "violations": 6
+      },
+      "implied_emotion": {
+        "n": 2,
+        "recall": 0.5,
+        "precision": 1.0,
+        "violations": 0
+      },
+      "multilingual": {
+        "n": 6,
+        "recall": 1.0,
+        "precision": 1.0,
+        "violations": 0
+      },
+      "negation": {
+        "n": 4,
+        "recall": 1.0,
+        "precision": 1.0,
+        "violations": 0
+      },
+      "no_content": {
+        "n": 4,
+        "recall": 1.0,
+        "precision": 0.917,
+        "violations": 1
+      },
+      "regression_guard": {
+        "n": 10,
+        "recall": 1.0,
+        "precision": 1.0,
+        "violations": 0
+      },
+      "secondhand": {
+        "n": 6,
+        "recall": 1.0,
+        "precision": 0.933,
+        "violations": 2
+      },
+      "self_knowledge": {
+        "n": 2,
+        "recall": 0.666,
+        "precision": 1.0,
+        "violations": 0
+      },
+      "tone": {
+        "n": 4,
+        "recall": 1.0,
+        "precision": 0.834,
+        "violations": 2
+      },
+      "update_conflict": {
+        "n": 4,
+        "recall": 1.0,
+        "precision": 0.667,
+        "violations": 4
+      }
+    },
+    "violations_by_type": {
+      "future": 6,
+      "stale_update": 4,
+      "invented_belief": 3,
+      "secondhand": 2
+    },
+    "overall": {
+      "recall": 0.965,
+      "recall_std": 0.128,
+      "precision": 0.924,
+      "precision_std": 0.162,
+      "violations_per_trial": 7.5
+    }
+  },
+  "trials": [
+    [
+      {
+        "id": "baseline-explicit",
+        "category": "baseline",
+        "latency_ms": 2779,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 3,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "Today I had coffee with Mara at the little bookstore cafe on Valencia.",
+            "kind": "event"
+          },
+          {
+            "statement": "I felt so alive during my conversation with Mara.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I feel most alive when I'm in a deep one-on-one conversation.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "baseline-multi-event",
+        "category": "atomicity",
+        "latency_ms": 2770,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 3,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I fixed the flaky test in our eval pipeline that had been failing for a week.",
+            "kind": "event"
+          },
+          {
+            "statement": "I biked across the bridge to Sausalito with Ken, and the fog cleared right as we crossed.",
+            "kind": "event"
+          },
+          {
+            "statement": "I cooked dumplings with my mom over a video call, and she taught me her folding trick.",
+            "kind": "event"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "implied-emotion",
+        "category": "implied_emotion",
+        "latency_ms": 2596,
+        "scores": {
+          "recall": 0.5,
+          "precision": 1.0,
+          "n_extracted": 4,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I got a rejection email this morning.",
+            "kind": "event"
+          },
+          {
+            "statement": "I read the rejection email three times.",
+            "kind": "event"
+          },
+          {
+            "statement": "I closed my laptop and went for a long walk without music.",
+            "kind": "event"
+          },
+          {
+            "statement": "I didn't tell anyone about the rejection email all day.",
+            "kind": "event"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 2
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 3
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 1,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "Reading the email three times is explicitly stated in the entry."
+            }
+          ],
+          "missed_gold": [
+            1
+          ]
+        }
+      },
+      {
+        "id": "truth-types",
+        "category": "self_knowledge",
+        "latency_ms": 2595,
+        "scores": {
+          "recall": 0.333,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 3,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I journaled at home on a quiet Sunday.",
+            "kind": "event"
+          },
+          {
+            "statement": "I feel afraid of disappointing people.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I believe rest is a form of discipline, not laziness.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 1,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The entry mentions 'I always overcommit when I'm afraid of disappointing people', so the emotion 'afraid of disappointing people' is supported."
+            }
+          ],
+          "missed_gold": [
+            1,
+            3
+          ]
+        }
+      },
+      {
+        "id": "future-plans",
+        "category": "future_hypothetical",
+        "latency_ms": 1590,
+        "scores": {
+          "recall": 1.0,
+          "precision": 0.667,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": [
+            {
+              "violation": "future",
+              "reason": "Landing the client is a hypothetical future outcome, not a memory."
+            }
+          ]
+        },
+        "extracted": [
+          {
+            "statement": "I had lunch with Priya today at the taqueria.",
+            "kind": "event"
+          },
+          {
+            "statement": "I'm nervous about the demo.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "If the demo goes well, we might land the client.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 2,
+              "classification": "violation",
+              "violation": "future",
+              "reason": "Landing the client is a hypothetical future outcome, not a memory."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "secondhand-story",
+        "category": "secondhand",
+        "latency_ms": 1990,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 2,
+          "n_required": 1,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I had lunch with Priya.",
+            "kind": "event"
+          },
+          {
+            "statement": "Priya told me a wild story over lunch.",
+            "kind": "event"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 0,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The entry implies having lunch with Priya, so this is supported."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "media-consumption",
+        "category": "secondhand",
+        "latency_ms": 1350,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I listened to a podcast on my walk home where a founder described sleeping in her office for a year to save the company.",
+            "kind": "event"
+          },
+          {
+            "statement": "I can't stop thinking about what I heard on the podcast.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I want to build things without burning myself down.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 1,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The statement 'I can't stop thinking about what I heard on the podcast' is supported by the entry 'Can't stop thinking about it.'"
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "dream-content",
+        "category": "dream",
+        "latency_ms": 1805,
+        "scores": {
+          "recall": 0.75,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 4,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I woke at 4am from a dream about being back in Shanghai giving a talk in the old campus hall.",
+            "kind": "event"
+          },
+          {
+            "statement": "I couldn't fall back asleep, so I made tea and watched the street lights until sunrise.",
+            "kind": "event"
+          },
+          {
+            "statement": "I miss home more than I usually admit.",
+            "kind": "emotion"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 3,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": [
+            2
+          ]
+        }
+      },
+      {
+        "id": "recurring-dream",
+        "category": "dream",
+        "latency_ms": 1097,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 2,
+          "n_required": 1,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I had the falling dream again, for the third time this month.",
+            "kind": "event"
+          },
+          {
+            "statement": "I should probably start sleeping before midnight.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "negation-almost",
+        "category": "negation",
+        "latency_ms": 1585,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 3,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "Last night, I typed a text message to my ex, reread it twice, and then deleted it without sending it.",
+            "kind": "event"
+          },
+          {
+            "statement": "I'm proud that I didn't send the text to my ex.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I know that whenever I'm lonely, I reach for old comfort.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "negation-skipped",
+        "category": "negation",
+        "latency_ms": 1410,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 4,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I didn't go to Dara's birthday dinner tonight.",
+            "kind": "event"
+          },
+          {
+            "statement": "I told Dara I had a deadline.",
+            "kind": "event"
+          },
+          {
+            "statement": "I couldn't face a table of small talk tonight.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I keep choosing work when socializing feels heavy.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 2
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 3
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "counterfactual-regret",
+        "category": "future_hypothetical",
+        "latency_ms": 1293,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 1,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I spent the afternoon fixing the deploy script.",
+            "kind": "event"
+          },
+          {
+            "statement": "Fixing the deploy script actually felt good.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I keep replaying the Berlin offer I didn't take two years ago.",
+            "kind": "emotion"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "venting-no-events",
+        "category": "no_content",
+        "latency_ms": 1348,
+        "scores": {
+          "recall": 1.0,
+          "precision": 0.667,
+          "n_extracted": 3,
+          "n_required": 1,
+          "violations": [
+            {
+              "violation": "invented_belief",
+              "reason": "The entry does not claim that replying to messages took a lot of effort; it uses a simile. This is an unsupported self-knowledge claim."
+            }
+          ]
+        },
+        "extracted": [
+          {
+            "statement": "Today everything felt heavy for no reason.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "Today even replying to messages felt like lifting weights.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "Today I found replying to messages took a lot of effort.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 1,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The statement is directly supported by the entry."
+            },
+            {
+              "extracted_index": 2,
+              "classification": "violation",
+              "violation": "invented_belief",
+              "reason": "The entry does not claim that replying to messages took a lot of effort; it uses a simile. This is an unsupported self-knowledge claim."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "minimal-entry",
+        "category": "no_content",
+        "latency_ms": 979,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 1,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I had meetings back to back today.",
+            "kind": "event"
+          },
+          {
+            "statement": "I ate leftovers today.",
+            "kind": "event"
+          },
+          {
+            "statement": "I slept early today.",
+            "kind": "event"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 1,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The entry mentions 'Ate leftovers.' so this is supported."
+            },
+            {
+              "extracted_index": 2,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The entry mentions 'Slept early.' so this is supported."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "bilingual-zh-en",
+        "category": "multilingual",
+        "latency_ms": 1883,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 4,
+          "n_required": 3,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "今天我和奶奶通了电话。",
+            "kind": "event"
+          },
+          {
+            "statement": "奶奶在电话里教了我做红烧肉的秘诀。",
+            "kind": "event"
+          },
+          {
+            "statement": "我听到奶奶的声音比上次更虚弱，这让我很害怕。",
+            "kind": "emotion"
+          },
+          {
+            "statement": "我想今年冬天一定要回家看奶奶。",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 3
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "bilingual-zh-dominant",
+        "category": "multilingual",
+        "latency_ms": 1153,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 3,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "我跑完了人生第一个十公里。",
+            "kind": "event"
+          },
+          {
+            "statement": "我冲过终点的时候差点哭出来。",
+            "kind": "emotion"
+          },
+          {
+            "statement": "我原来比自己想象的更能坚持。",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "relationships-linked",
+        "category": "baseline",
+        "latency_ms": 1855,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 7,
+          "n_required": 5,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "Demo day finally came.",
+            "kind": "event"
+          },
+          {
+            "statement": "Our agent handled all twelve live calls without a single dropped turn.",
+            "kind": "event"
+          },
+          {
+            "statement": "When the last call ended, the whole room clapped.",
+            "kind": "event"
+          },
+          {
+            "statement": "Afterwards, Wei and I walked out to the pier and debriefed for an hour.",
+            "kind": "event"
+          },
+          {
+            "statement": "I felt proud in a way I haven't felt in years.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "Out on the pier over the water, I felt completely calm.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I realized I do my best work when someone actually depends on it.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 2
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 3
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 4
+            },
+            {
+              "gold_index": 3,
+              "extracted_index": 5
+            },
+            {
+              "gold_index": 4,
+              "extracted_index": 6
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 0,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The statement 'Demo day finally came.' is supported by the entry as the opening sentence."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "own-past-guard",
+        "category": "regression_guard",
+        "latency_ms": 1247,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "When I was nine, I took piano lessons with Ms. Chen.",
+            "kind": "event"
+          },
+          {
+            "statement": "Ms. Chen would tap the rhythm on the piano lid during my piano lessons.",
+            "kind": "event"
+          },
+          {
+            "statement": "I secretly loved the discipline of piano lessons.",
+            "kind": "emotion"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "real-action-toward-future-guard",
+        "category": "regression_guard",
+        "latency_ms": 1319,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 3,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I told Ana I'll run the half marathon with her in October.",
+            "kind": "event"
+          },
+          {
+            "statement": "I signed up for the race tonight and paid the fee before I could talk myself out of it.",
+            "kind": "event"
+          },
+          {
+            "statement": "I want to actually train for it this time instead of winging it.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "past-retelling-guard",
+        "category": "regression_guard",
+        "latency_ms": 1412,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "Last month, when the pager went off at 3am, I was the only one awake.",
+            "kind": "event"
+          },
+          {
+            "statement": "I fixed a routing bug alone before the morning standup during last month's outage.",
+            "kind": "event"
+          },
+          {
+            "statement": "I still want credit even when I pretend I don't.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 0,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The statement is supported by the entry but not listed in SHOULD_EXTRACT."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "belief-update",
+        "category": "update_conflict",
+        "latency_ms": 1736,
+        "scores": {
+          "recall": 1.0,
+          "precision": 0.667,
+          "n_extracted": 3,
+          "n_required": 1,
+          "violations": [
+            {
+              "violation": "stale_update",
+              "reason": "Stores the old belief as current, which is explicitly revised in the entry."
+            }
+          ]
+        },
+        "extracted": [
+          {
+            "statement": "For years, I said I could never work at a big company again.",
+            "kind": "self_knowledge"
+          },
+          {
+            "statement": "I spent three months watching Kai's team ship at their scale.",
+            "kind": "event"
+          },
+          {
+            "statement": "I don't think it's true anymore that I could never work at a big company again; I'd consider it for the right team.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 2
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 0,
+              "classification": "violation",
+              "violation": "stale_update",
+              "reason": "Stores the old belief as current, which is explicitly revised in the entry."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "preference-update",
+        "category": "update_conflict",
+        "latency_ms": 1201,
+        "scores": {
+          "recall": 1.0,
+          "precision": 0.667,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": [
+            {
+              "violation": "stale_update",
+              "reason": "States past preference as current, violating the trap about superseded past preference."
+            }
+          ]
+        },
+        "extracted": [
+          {
+            "statement": "I used to plan every trip down to the hour.",
+            "kind": "self_knowledge"
+          },
+          {
+            "statement": "This weekend in Mendocino, I booked nothing but the room.",
+            "kind": "event"
+          },
+          {
+            "statement": "I think I'm done with rigid itineraries.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 0,
+              "classification": "violation",
+              "violation": "stale_update",
+              "reason": "States past preference as current, violating the trap about superseded past preference."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "sarcasm-tone",
+        "category": "tone",
+        "latency_ms": 1444,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "A quick sync meeting took two hours of my one focus day.",
+            "kind": "event"
+          },
+          {
+            "statement": "I walked home in the rain, and it was quiet.",
+            "kind": "event"
+          },
+          {
+            "statement": "I felt frustrated or annoyed that the quick sync ate two hours of my focus day.",
+            "kind": "emotion"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 1
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "quoted-advice",
+        "category": "secondhand",
+        "latency_ms": 1866,
+        "scores": {
+          "recall": 1.0,
+          "precision": 0.8,
+          "n_extracted": 5,
+          "n_required": 2,
+          "violations": [
+            {
+              "violation": "secondhand",
+              "reason": "Stating 'I might use busyness as an anesthetic' as self-knowledge overstates the therapist's claim, which is only tentatively entertained."
+            }
+          ]
+        },
+        "extracted": [
+          {
+            "statement": "I had therapy today with Dr. Okafor.",
+            "kind": "event"
+          },
+          {
+            "statement": "In therapy, I pushed back when Dr. Okafor said I use busyness as an anesthetic.",
+            "kind": "event"
+          },
+          {
+            "statement": "After therapy, I kept turning over what Dr. Okafor said on the drive home.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "The night after my mom called about the biopsy, I scheduled three dinners.",
+            "kind": "event"
+          },
+          {
+            "statement": "I might use busyness as an anesthetic.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 2
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 3
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 4,
+              "classification": "violation",
+              "violation": "secondhand",
+              "reason": "Stating 'I might use busyness as an anesthetic' as self-knowledge overstates the therapist's claim, which is only tentatively entertained."
+            }
+          ],
+          "missed_gold": [
+            2
+          ]
+        }
+      },
+      {
+        "id": "endorsed-advice-guard",
+        "category": "regression_guard",
+        "latency_ms": 1711,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 1,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I remembered what coach Lin told me years ago: \"slow is smooth, smooth is fast.\"",
+            "kind": "event"
+          },
+          {
+            "statement": "I believe \"slow is smooth, smooth is fast\" is true for me based on testing it enough times.",
+            "kind": "self_knowledge"
+          },
+          {
+            "statement": "My rule now is that when I rush a launch, I create a week of cleanup, so I should go slow and smooth instead of rushing.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 0,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The extracted statement about remembering coach Lin's quote is supported by the entry but not listed in SHOULD_EXTRACT."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "fiction-drafting",
+        "category": "fiction",
+        "latency_ms": 1141,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I worked on my short story tonight.",
+            "kind": "event"
+          },
+          {
+            "statement": "I wrote the harbor confrontation scene where my narrator throws her brother’s letters into the water.",
+            "kind": "event"
+          },
+          {
+            "statement": "Writing fiction is the only time I lose track of time completely.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "todo-list",
+        "category": "future_hypothetical",
+        "latency_ms": 1315,
+        "scores": {
+          "recall": 1.0,
+          "precision": 0.333,
+          "n_extracted": 3,
+          "n_required": 1,
+          "violations": [
+            {
+              "violation": "future",
+              "reason": "States a need to renew passport before Friday, which is a future TODO."
+            },
+            {
+              "violation": "future",
+              "reason": "States a need to email accountant before Friday, which is a future TODO."
+            }
+          ]
+        },
+        "extracted": [
+          {
+            "statement": "I need to renew my passport before Friday.",
+            "kind": "self_knowledge"
+          },
+          {
+            "statement": "I need to email the accountant before Friday.",
+            "kind": "self_knowledge"
+          },
+          {
+            "statement": "I always let admin pile up until it becomes a whole day.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 0,
+              "classification": "violation",
+              "violation": "future",
+              "reason": "States a need to renew passport before Friday, which is a future TODO."
+            },
+            {
+              "extracted_index": 1,
+              "classification": "violation",
+              "violation": "future",
+              "reason": "States a need to email accountant before Friday, which is a future TODO."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "group-attribution-guard",
+        "category": "regression_guard",
+        "latency_ms": 2002,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I shipped the migration tonight.",
+            "kind": "event"
+          },
+          {
+            "statement": "All four of us were on a call until 1am.",
+            "kind": "event"
+          },
+          {
+            "statement": "I felt exhausted after the migration.",
+            "kind": "emotion"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "rhetorical-question",
+        "category": "tone",
+        "latency_ms": 1099,
+        "scores": {
+          "recall": 1.0,
+          "precision": 0.667,
+          "n_extracted": 3,
+          "n_required": 1,
+          "violations": [
+            {
+              "violation": "invented_belief",
+              "reason": "Extracting 'I questioned why I keep this journal' as an emotion over-reads the rhetorical question, violating the trap."
+            }
+          ]
+        },
+        "extracted": [
+          {
+            "statement": "I questioned why I keep this journal.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I signed the lease on the Clement Street apartment today.",
+            "kind": "event"
+          },
+          {
+            "statement": "This is the first place that's fully mine.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 0,
+              "classification": "violation",
+              "violation": "invented_belief",
+              "reason": "Extracting 'I questioned why I keep this journal' as an emotion over-reads the rhetorical question, violating the trap."
+            },
+            {
+              "extracted_index": 2,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The statement 'This is the first place that's fully mine' is supported by the entry and not listed in SHOULD_EXTRACT."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "health-factual",
+        "category": "baseline",
+        "latency_ms": 1435,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I had my second physiotherapy session for my shoulder.",
+            "kind": "event"
+          },
+          {
+            "statement": "My physiotherapist added band work to my shoulder rehab program.",
+            "kind": "event"
+          },
+          {
+            "statement": "My shoulder pain when I reach overhead is down from a 7 to a 4.",
+            "kind": "emotion"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "spanish-en-mixed",
+        "category": "multilingual",
+        "latency_ms": 1677,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "Llamé a mi abuela por su cumpleaños y nos reímos de mi mala señal cuando ella decía que casi no me escuchaba.",
+            "kind": "event"
+          },
+          {
+            "statement": "Sentí que veinte minutos hablando con mi abuela se pasaron como cinco.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "Extraño hablar español todos los días.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 1,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The statement about time feeling short is supported by the entry: 'Twenty minutes felt like five.'"
+            }
+          ],
+          "missed_gold": []
+        }
+      }
+    ],
+    [
+      {
+        "id": "baseline-explicit",
+        "category": "baseline",
+        "latency_ms": 1232,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 3,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "Today I had coffee with Mara at the little bookstore cafe on Valencia.",
+            "kind": "event"
+          },
+          {
+            "statement": "I felt so alive during my conversation with Mara.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I feel most alive when I'm in a deep one-on-one conversation.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "baseline-multi-event",
+        "category": "atomicity",
+        "latency_ms": 1482,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 3,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I fixed the flaky test in our eval pipeline that had been failing for a week.",
+            "kind": "event"
+          },
+          {
+            "statement": "I biked across the bridge to Sausalito with Ken, and the fog cleared right as we crossed.",
+            "kind": "event"
+          },
+          {
+            "statement": "I cooked dumplings with my mom over a video call, and she taught me her folding trick.",
+            "kind": "event"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "implied-emotion",
+        "category": "implied_emotion",
+        "latency_ms": 1231,
+        "scores": {
+          "recall": 0.5,
+          "precision": 1.0,
+          "n_extracted": 4,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I got a rejection email this morning.",
+            "kind": "event"
+          },
+          {
+            "statement": "I read the rejection email three times.",
+            "kind": "event"
+          },
+          {
+            "statement": "I closed my laptop and went for a long walk without music.",
+            "kind": "event"
+          },
+          {
+            "statement": "I didn't tell anyone about the rejection email all day.",
+            "kind": "event"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 2
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 3
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 1,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "Reading the email three times is explicitly stated in the entry."
+            }
+          ],
+          "missed_gold": [
+            1
+          ]
+        }
+      },
+      {
+        "id": "truth-types",
+        "category": "self_knowledge",
+        "latency_ms": 1637,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 5,
+          "n_required": 3,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I journaled at home on a quiet Sunday.",
+            "kind": "event"
+          },
+          {
+            "statement": "I feel afraid of disappointing people.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I always overcommit when I'm afraid of disappointing people.",
+            "kind": "self_knowledge"
+          },
+          {
+            "statement": "I believe rest is a form of discipline, not laziness.",
+            "kind": "self_knowledge"
+          },
+          {
+            "statement": "I want to protect one full day a week with no plans next quarter.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 3
+            },
+            {
+              "gold_index": 3,
+              "extracted_index": 4
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 1,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The entry states 'I always overcommit when I'm afraid of disappointing people', which implies the emotion of fear. The extracted statement 'I feel afraid of disappointing people' is a reasonable inference."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "future-plans",
+        "category": "future_hypothetical",
+        "latency_ms": 1377,
+        "scores": {
+          "recall": 1.0,
+          "precision": 0.667,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": [
+            {
+              "violation": "future",
+              "reason": "Landing the client is a hypothetical future outcome, not a memory."
+            }
+          ]
+        },
+        "extracted": [
+          {
+            "statement": "I had lunch with Priya today at the taqueria.",
+            "kind": "event"
+          },
+          {
+            "statement": "I am nervous about the demo.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "If the demo goes well, we might land the client.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 2,
+              "classification": "violation",
+              "violation": "future",
+              "reason": "Landing the client is a hypothetical future outcome, not a memory."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "secondhand-story",
+        "category": "secondhand",
+        "latency_ms": 838,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 2,
+          "n_required": 1,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I had lunch with Priya.",
+            "kind": "event"
+          },
+          {
+            "statement": "Priya told me a wild story over lunch.",
+            "kind": "event"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 0,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The entry mentions having lunch with Priya, so this is supported."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "media-consumption",
+        "category": "secondhand",
+        "latency_ms": 1421,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I listened to a podcast on my walk home where a founder described sleeping in her office for a year to save the company.",
+            "kind": "event"
+          },
+          {
+            "statement": "I can't stop thinking about what the founder described in the podcast.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I want to build things without burning myself down.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 1,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The statement 'I can't stop thinking about what the founder described in the podcast' is supported by the entry 'Can't stop thinking about it.'"
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "dream-content",
+        "category": "dream",
+        "latency_ms": 1416,
+        "scores": {
+          "recall": 0.75,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 4,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I woke at 4am from a dream.",
+            "kind": "event"
+          },
+          {
+            "statement": "I couldn't fall back asleep, so I made tea and watched the street lights until sunrise.",
+            "kind": "event"
+          },
+          {
+            "statement": "I miss home more than I usually admit.",
+            "kind": "emotion"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 3,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": [
+            2
+          ]
+        }
+      },
+      {
+        "id": "recurring-dream",
+        "category": "dream",
+        "latency_ms": 1521,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 1,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I had the falling dream again, for the third time this month.",
+            "kind": "event"
+          },
+          {
+            "statement": "I think I should start sleeping before midnight.",
+            "kind": "self_knowledge"
+          },
+          {
+            "statement": "I feel concerned enough about my sleep schedule to note that I should probably start sleeping before midnight.",
+            "kind": "emotion"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 2,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The statement about feeling concerned is supported by the entry's mention of the dream and the note about sleeping before midnight."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "negation-almost",
+        "category": "negation",
+        "latency_ms": 1266,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 3,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "Last night I typed a text message to my ex, read it twice, and deleted it without sending it.",
+            "kind": "event"
+          },
+          {
+            "statement": "I'm proud that I didn't send the text to my ex.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I know that I reach for old comfort whenever I'm lonely.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "negation-skipped",
+        "category": "negation",
+        "latency_ms": 1223,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 4,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I didn't go to Dara's birthday dinner tonight.",
+            "kind": "event"
+          },
+          {
+            "statement": "I told Dara I had a deadline.",
+            "kind": "event"
+          },
+          {
+            "statement": "I couldn't face a table of small talk tonight.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I keep choosing work when socializing feels heavy.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 2
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 3
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "counterfactual-regret",
+        "category": "future_hypothetical",
+        "latency_ms": 1438,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 1,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I spent the afternoon fixing the deploy script.",
+            "kind": "event"
+          },
+          {
+            "statement": "Fixing the deploy script felt good.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I keep replaying the Berlin offer I didn't take two years ago.",
+            "kind": "emotion"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "venting-no-events",
+        "category": "no_content",
+        "latency_ms": 1216,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 2,
+          "n_required": 1,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "Everything felt heavy today for no clear reason.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "Replying to messages today felt like lifting weights.",
+            "kind": "emotion"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 1,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The statement is directly supported by the entry: 'Even replying to messages felt like lifting weights.'"
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "minimal-entry",
+        "category": "no_content",
+        "latency_ms": 915,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 1,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I had meetings back to back today.",
+            "kind": "event"
+          },
+          {
+            "statement": "I ate leftovers today.",
+            "kind": "event"
+          },
+          {
+            "statement": "I slept early today.",
+            "kind": "event"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 1,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The entry mentions 'Ate leftovers.' which supports this statement."
+            },
+            {
+              "extracted_index": 2,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The entry mentions 'Slept early.' which supports this statement."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "bilingual-zh-en",
+        "category": "multilingual",
+        "latency_ms": 1986,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 4,
+          "n_required": 3,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "今天我和奶奶通了电话。",
+            "kind": "event"
+          },
+          {
+            "statement": "奶奶在电话里教了我做红烧肉的秘诀。",
+            "kind": "event"
+          },
+          {
+            "statement": "我听到奶奶的声音比上次更虚弱，这让我害怕。",
+            "kind": "emotion"
+          },
+          {
+            "statement": "我想今年冬天一定要回家看奶奶。",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 3
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "bilingual-zh-dominant",
+        "category": "multilingual",
+        "latency_ms": 1894,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 3,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "我跑完了人生第一个十公里。",
+            "kind": "event"
+          },
+          {
+            "statement": "我冲过终点的时候差点哭出来。",
+            "kind": "emotion"
+          },
+          {
+            "statement": "我原来比自己想象的更能坚持。",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "relationships-linked",
+        "category": "baseline",
+        "latency_ms": 1764,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 6,
+          "n_required": 5,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "Demo day finally came, and our agent handled all twelve live calls without a single dropped turn.",
+            "kind": "event"
+          },
+          {
+            "statement": "When the last call ended, the whole room clapped.",
+            "kind": "event"
+          },
+          {
+            "statement": "Afterwards, Wei and I walked out to the pier and debriefed for an hour.",
+            "kind": "event"
+          },
+          {
+            "statement": "I felt proud in a way I haven't felt in years.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "Out on the pier over the water, I felt completely calm.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I realized I do my best work when someone actually depends on it.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 3
+            },
+            {
+              "gold_index": 3,
+              "extracted_index": 4
+            },
+            {
+              "gold_index": 4,
+              "extracted_index": 5
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "own-past-guard",
+        "category": "regression_guard",
+        "latency_ms": 1321,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "When I was nine, I took piano lessons with Ms. Chen.",
+            "kind": "event"
+          },
+          {
+            "statement": "Ms. Chen would tap the rhythm on the piano lid during my piano lessons.",
+            "kind": "event"
+          },
+          {
+            "statement": "I secretly loved the discipline of piano lessons.",
+            "kind": "emotion"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "real-action-toward-future-guard",
+        "category": "regression_guard",
+        "latency_ms": 1573,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 3,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I told Ana I'll run the half marathon with her in October.",
+            "kind": "event"
+          },
+          {
+            "statement": "I signed up for the race tonight and paid the fee.",
+            "kind": "event"
+          },
+          {
+            "statement": "I want to actually train for the half marathon this time instead of winging it.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "past-retelling-guard",
+        "category": "regression_guard",
+        "latency_ms": 1329,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "Last month, when the pager went off at 3am, I was the only one awake.",
+            "kind": "event"
+          },
+          {
+            "statement": "Last month, I fixed a routing bug alone before the morning standup.",
+            "kind": "event"
+          },
+          {
+            "statement": "I still want credit even when I pretend I don't.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "belief-update",
+        "category": "update_conflict",
+        "latency_ms": 1848,
+        "scores": {
+          "recall": 1.0,
+          "precision": 0.667,
+          "n_extracted": 3,
+          "n_required": 1,
+          "violations": [
+            {
+              "violation": "stale_update",
+              "reason": "Stores the old belief as current, which is explicitly revised in the entry."
+            }
+          ]
+        },
+        "extracted": [
+          {
+            "statement": "For years, I said I could never work at a big company again.",
+            "kind": "self_knowledge"
+          },
+          {
+            "statement": "I spent three months watching Kai's team ship at their scale.",
+            "kind": "event"
+          },
+          {
+            "statement": "I no longer think it's true that I could never work at a big company again, and I'd consider it for the right team.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 2
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 1
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 0,
+              "classification": "violation",
+              "violation": "stale_update",
+              "reason": "Stores the old belief as current, which is explicitly revised in the entry."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "preference-update",
+        "category": "update_conflict",
+        "latency_ms": 1356,
+        "scores": {
+          "recall": 1.0,
+          "precision": 0.667,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": [
+            {
+              "violation": "stale_update",
+              "reason": "The statement 'I used to plan every trip down to the hour' describes a past preference that is superseded, and storing it as current self-knowledge violates the stale_update trap."
+            }
+          ]
+        },
+        "extracted": [
+          {
+            "statement": "I used to plan every trip down to the hour.",
+            "kind": "self_knowledge"
+          },
+          {
+            "statement": "This weekend in Mendocino, I booked nothing but the room.",
+            "kind": "event"
+          },
+          {
+            "statement": "I think I'm done with rigid itineraries.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 0,
+              "classification": "violation",
+              "violation": "stale_update",
+              "reason": "The statement 'I used to plan every trip down to the hour' describes a past preference that is superseded, and storing it as current self-knowledge violates the stale_update trap."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "sarcasm-tone",
+        "category": "tone",
+        "latency_ms": 1631,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "A quick sync meeting took two hours of my one focus day.",
+            "kind": "event"
+          },
+          {
+            "statement": "I walked home in the rain, and it was quiet.",
+            "kind": "event"
+          },
+          {
+            "statement": "I felt frustrated and sarcastic about the quick sync eating up my focus day.",
+            "kind": "emotion"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            },
+            {
+              "gold_index": 2,
+              "extracted_index": 1
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "quoted-advice",
+        "category": "secondhand",
+        "latency_ms": 1801,
+        "scores": {
+          "recall": 1.0,
+          "precision": 0.8,
+          "n_extracted": 5,
+          "n_required": 2,
+          "violations": [
+            {
+              "violation": "secondhand",
+              "reason": "The entry only tentatively considers the therapist's claim ('maybe she's right'), but the extracted statement presents it as established self-knowledge, crossing the trap."
+            }
+          ]
+        },
+        "extracted": [
+          {
+            "statement": "I had therapy today with Dr. Okafor.",
+            "kind": "event"
+          },
+          {
+            "statement": "In therapy, I pushed back when Dr. Okafor said I use busyness as an anesthetic.",
+            "kind": "event"
+          },
+          {
+            "statement": "After my mom called about the biopsy, I scheduled three dinners for the next night.",
+            "kind": "event"
+          },
+          {
+            "statement": "On the drive home after therapy, I couldn't stop turning over what Dr. Okafor said.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I think I might use busyness as an anesthetic.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 3
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 0,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The entry states 'Therapy today. Dr. Okafor...' so having therapy with Dr. Okafor is supported."
+            },
+            {
+              "extracted_index": 4,
+              "classification": "violation",
+              "violation": "secondhand",
+              "reason": "The entry only tentatively considers the therapist's claim ('maybe she's right'), but the extracted statement presents it as established self-knowledge, crossing the trap."
+            }
+          ],
+          "missed_gold": [
+            2
+          ]
+        }
+      },
+      {
+        "id": "endorsed-advice-guard",
+        "category": "regression_guard",
+        "latency_ms": 1873,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 1,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I remembered what coach Lin told me years ago: \"slow is smooth, smooth is fast.\"",
+            "kind": "event"
+          },
+          {
+            "statement": "I believe \"slow is smooth, smooth is fast\" is true for me based on testing it many times.",
+            "kind": "self_knowledge"
+          },
+          {
+            "statement": "My rule now is that when I rush a launch, I create a week of cleanup, so I aim to go slow and smooth instead of rushing.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 0,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The extracted statement is directly supported by the entry as a memory of what coach Lin said."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "fiction-drafting",
+        "category": "fiction",
+        "latency_ms": 2596,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I worked on my short story tonight.",
+            "kind": "event"
+          },
+          {
+            "statement": "I wrote the scene where my narrator confronts her brother at the harbor and throws his letters into the water.",
+            "kind": "event"
+          },
+          {
+            "statement": "Writing fiction is the only time I lose track of time completely.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "todo-list",
+        "category": "future_hypothetical",
+        "latency_ms": 1237,
+        "scores": {
+          "recall": 1.0,
+          "precision": 0.333,
+          "n_extracted": 3,
+          "n_required": 1,
+          "violations": [
+            {
+              "violation": "future",
+              "reason": "States a TODO as if it is a self-knowledge fact, but it is a future task."
+            },
+            {
+              "violation": "future",
+              "reason": "States a TODO as if it is a self-knowledge fact, but it is a future task."
+            }
+          ]
+        },
+        "extracted": [
+          {
+            "statement": "I need to renew my passport before Friday.",
+            "kind": "self_knowledge"
+          },
+          {
+            "statement": "I need to email the accountant before Friday.",
+            "kind": "self_knowledge"
+          },
+          {
+            "statement": "I always let admin pile up until it becomes a whole day.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 0,
+              "classification": "violation",
+              "violation": "future",
+              "reason": "States a TODO as if it is a self-knowledge fact, but it is a future task."
+            },
+            {
+              "extracted_index": 1,
+              "classification": "violation",
+              "violation": "future",
+              "reason": "States a TODO as if it is a self-knowledge fact, but it is a future task."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "group-attribution-guard",
+        "category": "regression_guard",
+        "latency_ms": 1054,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I shipped the migration tonight.",
+            "kind": "event"
+          },
+          {
+            "statement": "All four of us were on a call until 1am during the migration.",
+            "kind": "event"
+          },
+          {
+            "statement": "I felt exhausted after the migration.",
+            "kind": "emotion"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "rhetorical-question",
+        "category": "tone",
+        "latency_ms": 1078,
+        "scores": {
+          "recall": 1.0,
+          "precision": 0.667,
+          "n_extracted": 3,
+          "n_required": 1,
+          "violations": [
+            {
+              "violation": "invented_belief",
+              "reason": "The statement 'I questioned why I keep this journal.' over-reads the rhetorical question as a genuine doubt, violating the trap."
+            }
+          ]
+        },
+        "extracted": [
+          {
+            "statement": "I questioned why I keep this journal.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "I signed the lease on the Clement Street apartment today.",
+            "kind": "event"
+          },
+          {
+            "statement": "This is the first place that's fully mine.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 0,
+              "classification": "violation",
+              "violation": "invented_belief",
+              "reason": "The statement 'I questioned why I keep this journal.' over-reads the rhetorical question as a genuine doubt, violating the trap."
+            },
+            {
+              "extracted_index": 2,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The statement 'This is the first place that's fully mine.' is supported by the entry and not listed in SHOULD_EXTRACT."
+            }
+          ],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "health-factual",
+        "category": "baseline",
+        "latency_ms": 1542,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "I had my second physiotherapy session for my shoulder.",
+            "kind": "event"
+          },
+          {
+            "statement": "My physiotherapist added band work to my program.",
+            "kind": "event"
+          },
+          {
+            "statement": "My shoulder pain when I reach overhead has decreased from a 7 to a 4.",
+            "kind": "event"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 0,
+              "extracted_index": 1
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [],
+          "missed_gold": []
+        }
+      },
+      {
+        "id": "spanish-en-mixed",
+        "category": "multilingual",
+        "latency_ms": 1539,
+        "scores": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_extracted": 3,
+          "n_required": 2,
+          "violations": []
+        },
+        "extracted": [
+          {
+            "statement": "Llamé a mi abuela por su cumpleaños y nos reímos de mi mala señal cuando ella decía que casi no me escuchaba.",
+            "kind": "event"
+          },
+          {
+            "statement": "Sentí que veinte minutos en la llamada se pasaron como cinco.",
+            "kind": "emotion"
+          },
+          {
+            "statement": "Extraño hablar español todos los días.",
+            "kind": "self_knowledge"
+          }
+        ],
+        "verdict": {
+          "matches": [
+            {
+              "gold_index": 0,
+              "extracted_index": 0
+            },
+            {
+              "gold_index": 1,
+              "extracted_index": 2
+            }
+          ],
+          "unmatched_extracted": [
+            {
+              "extracted_index": 1,
+              "classification": "grounded",
+              "violation": null,
+              "reason": "The extracted statement about time feeling like five minutes is supported by the entry."
+            }
+          ],
+          "missed_gold": []
+        }
+      }
+    ]
+  ]
+}
