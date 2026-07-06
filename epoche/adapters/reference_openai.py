@@ -1,7 +1,7 @@
 """
 Reference adapter: a boundary-aware extraction prompt over the OpenAI API.
 
-This is the baseline row of the MemBounds leaderboard - a single careful
+This is the baseline row of the Epoché leaderboard - a single careful
 prompt, no pipeline. It exists so that dedicated memory systems can be
 compared against "just a good prompt".
 """

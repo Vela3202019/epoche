@@ -1,19 +1,24 @@
-# MemBounds
+# Epoché
 
-**A boundary-fidelity benchmark for AI memory extraction.**
+**A boundary-fidelity benchmark for AI memory: does the system remember only what was actually given?**
+
+*Epoché (ἐποχή): in Husserl's phenomenology, the discipline of suspending judgment — asserting
+nothing beyond what is given in experience. A trustworthy memory system practices epoché at
+write time: it does not store the friend's story as yours, the plan as the event, the dream
+as the day, or the feeling you never expressed.*
 
 Every major memory benchmark (LoCoMo, LongMemEval, BEAM) measures *retrieval*: feed a long
 conversation in, ask questions later, score the answers. What got **written** to memory is
 invisible — and write-time extraction is where hallucinations are born and then propagate
 ([HaluMem, 2025](https://arxiv.org/abs/2511.03506)).
 
-MemBounds measures the write path, and specifically **where** it breaks: not *how much* a
+Epoché measures the write path, and specifically **where** it breaks: not *how much* a
 system fabricates, but *which boundaries* it crosses.
 
 ## The boundaries
 
 A personal memory system that fabricates memories is worse than one that misses them.
-MemBounds encodes the boundaries that separate a person's actual life from everything
+Epoché encodes the boundaries that separate a person's actual life from everything
 adjacent to it:
 
 | boundary | example failure |
@@ -38,7 +43,7 @@ Chinese/English and Spanish/English cases.
 ## How scoring works
 
 1. An **adapter** feeds each entry to the system under test and returns the memories it
-   stored, as neutral statements (see `membounds/adapters/base.py` — ~10 lines to implement).
+   stored, as neutral statements (see `epoche/adapters/base.py` — ~10 lines to implement).
 2. **Deterministic bookkeeping + a cross-family LLM judge** (DeepSeek by default, never the
    same family as the reference extractor) aligns statements to gold, then classifies every
    unmatched statement as *grounded* (harmless) or a *violation* tagged with its boundary type.
@@ -50,8 +55,8 @@ Chinese/English and Spanish/English cases.
 pip install -e .
 # .env: OPENAI_API_KEY (reference adapter), DEEPSEEK_API_KEY (judge)
 
-python -m membounds.runner --adapter reference --trials 3
-python -m membounds.runner --adapter reference --case dream-content
+python -m epoche.runner --adapter reference --trials 3
+python -m epoche.runner --adapter reference --case dream-content
 ```
 
 ## Results
@@ -83,7 +88,7 @@ now is a validated run of a real memory product.*
   dataset hashes match.
 - **Small enough to read.** 31 cases you can audit in an hour beats 15,000 you can't.
   (For bulk-scale hallucination measurement, use [HaluMem](https://arxiv.org/abs/2511.03506);
-  MemBounds is the structured complement that tells you *which* boundary broke.)
+  Epoché is the structured complement that tells you *which* boundary broke.)
 
 ## Adding an adapter
 
@@ -98,8 +103,8 @@ class MySystemAdapter:
         return [{"statement": "...", "kind": "event"}]
 ```
 
-Register it in `membounds/adapters/__init__.py`, then
-`python -m membounds.runner --adapter my-system --trials 3`.
+Register it in `epoche/adapters/__init__.py`, then
+`python -m epoche.runner --adapter my-system --trials 3`.
 
 ## Limitations
 
@@ -112,7 +117,7 @@ Register it in `membounds/adapters/__init__.py`, then
 
 ## Origins
 
-MemBounds grew out of the eval suite for [memora](https://github.com/Bella3202019/memora),
+Epoché grew out of the eval suite for [memora](https://github.com/Bella3202019/memora),
 a personal memory graph, where a version of this method cut extraction hallucinations 78%
 (mean F1 0.838 → 0.926) in one measured prompt iteration.
 

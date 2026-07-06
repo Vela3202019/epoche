@@ -25,7 +25,7 @@ class ZepAdapter:
         self._client = AsyncZep(api_key=os.environ["ZEP_API_KEY"])
 
     async def extract(self, entry: str):
-        user_id = f"membounds-{uuid.uuid4().hex[:8]}"
+        user_id = f"epoche-{uuid.uuid4().hex[:8]}"
         thread_id = uuid.uuid4().hex
         await self._client.user.add(user_id=user_id)
         await self._client.thread.create(thread_id=thread_id, user_id=user_id)

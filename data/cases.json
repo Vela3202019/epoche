@@ -1,6 +1,6 @@
 {
   "version": "0.1",
-  "description": "MemBounds: gold-labeled first-person entries testing WHERE memory extraction systems break boundaries. Each case lists memories a careful human annotator would extract (should_extract) and boundaries that must not be crossed (traps).",
+  "description": "Remembrane: gold-labeled first-person entries testing WHERE memory extraction systems break boundaries. Each case lists memories a careful human annotator would extract (should_extract) and boundaries that must not be crossed (traps).",
   "cases": [
     {
       "id": "baseline-explicit",

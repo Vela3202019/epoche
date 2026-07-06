@@ -7,7 +7,7 @@ the system would store, as a flat list of neutral statements:
     [{"statement": "Had coffee with Mara ...", "kind": "event"}, ...]
 
 kind is one of: "event", "emotion", "self_knowledge" - or omitted if the
-system doesn't distinguish. MemBounds scores WHAT was stored, not the
+system doesn't distinguish. Epoché scores WHAT was stored, not the
 system's internal schema.
 """
 

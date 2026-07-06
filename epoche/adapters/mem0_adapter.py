@@ -23,7 +23,7 @@ class Mem0Adapter:
         memory = await self._memory_cls.from_config({})
         result = await memory.add(
             messages=[{"role": "user", "content": entry}],
-            user_id="membounds-eval",
+            user_id="epoche-eval",
             infer=True,
         )
         return [

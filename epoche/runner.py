@@ -1,8 +1,8 @@
 """
-MemBounds runner.
+Epoché runner.
 
-    python -m membounds.runner --adapter reference --trials 3
-    python -m membounds.runner --adapter reference --case dream-content
+    python -m epoche.runner --adapter reference --trials 3
+    python -m epoche.runner --adapter reference --case dream-content
 
 Writes results/<adapter>-<stamp>.json and .md with a per-category boundary report.
 """
@@ -21,8 +21,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from membounds.adapters import load_adapter
-from membounds.judge import JUDGE_MODEL, judge_case
+from epoche.adapters import load_adapter
+from epoche.judge import JUDGE_MODEL, judge_case
 
 load_dotenv()
 logger = logging.getLogger(__name__)
@@ -139,7 +139,7 @@ def build_manifest(args, adapter_name: str, dataset_raw: str, n_cases: int) -> d
 
 def render_report(manifest: dict, agg: dict) -> str:
     lines = [
-        "# MemBounds report",
+        "# Epoché report",
         "",
         f"{manifest['timestamp']} · system **{manifest['adapter']}** · judge "
         f"`{manifest['judge']}` · {manifest['trials']} trial(s) × {manifest['n_cases']} "
@@ -167,7 +167,7 @@ def render_report(manifest: dict, agg: dict) -> str:
 
 
 async def main() -> None:
-    parser = argparse.ArgumentParser(description="Run MemBounds")
+    parser = argparse.ArgumentParser(description="Run Epoché")
     parser.add_argument("--adapter", default="reference")
     parser.add_argument("--model", default="gpt-5.2", help="Model for the reference adapter")
     parser.add_argument("--trials", type=int, default=1)
