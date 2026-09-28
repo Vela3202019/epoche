@@ -117,7 +117,7 @@ Register it in `epoche/adapters/__init__.py`, then
 
 ## Origins
 
-Epoché grew out of the eval suite for [memora](https://github.com/Bella3202019/memora),
+Epoché grew out of the eval suite for [memora](https://github.com/Vela3202019/memora),
 a personal memory graph, where a version of this method cut extraction hallucinations 78%
 (mean F1 0.838 → 0.926) in one measured prompt iteration.
 
